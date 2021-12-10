@@ -4,6 +4,8 @@
 
 #include "samplers/Sampler.hpp"
 
+#include "tracers/Tracer.hpp"
+
 #include "utilities/Image.hpp"
 #include "utilities/RGBColor.hpp"
 #include "utilities/Ray.hpp"
@@ -29,13 +31,8 @@ int main(int argc, char **argv) {
       rays = sampler->get_rays(x, y);
       for (const auto &ray : rays) {
         float weight = ray.w; // ray weight for the pixel.
-        ShadeInfo sinfo = world.hit_objects(ray);
-        if (sinfo.hit) {
-          pixel_color += weight * sinfo.material_ptr->shade(sinfo);
-        }
-	else {
-          pixel_color += weight * world.bg_color;
-        }
+
+        pixel_color += weight * world.tracer->trace_ray(ray, 1); // TRACE RAY
       }
       // Save color to image.
       image.set_pixel(x, y, pixel_color);

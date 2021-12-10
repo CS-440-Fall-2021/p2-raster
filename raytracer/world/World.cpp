@@ -6,6 +6,7 @@
 #include "../samplers/Sampler.hpp"
 #include "../geometry/Geometry.hpp"
 #include "../utilities/ShadeInfo.hpp"
+#include "../tracers/Basic.hpp"
 #include "ViewPlane.hpp"
 #include "World.hpp"
 
@@ -17,6 +18,7 @@ World::World()
     bg_color = 0;
     camera_ptr = NULL;
     sampler_ptr = NULL;
+    tracer = new Basic(this);
 }
 
 World::~World()
@@ -24,6 +26,7 @@ World::~World()
     this->camera_ptr = NULL;
     this->sampler_ptr = NULL;
     this->geometry.clear();
+    delete tracer;
 }
 
 void World::add_geometry(Geometry *geom_ptr)

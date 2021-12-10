@@ -2,8 +2,8 @@
 
 Sampler::Sampler()
 {
-    camera_ptr = NULL;
-    viewplane_ptr = NULL;
+    camera_ptr = nullptr;
+    viewplane_ptr = nullptr;
 }
 
 Sampler::Sampler(Camera *c_ptr, ViewPlane *v_ptr)
