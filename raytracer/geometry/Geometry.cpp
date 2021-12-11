@@ -20,3 +20,8 @@ void Geometry::set_material(Material *mPtr)
     }
     this->material_ptr = mPtr;
 }
+
+bool Geometry::shadow_hit(const Ray &ray, double &tmin) const
+{
+    return (false);
+}

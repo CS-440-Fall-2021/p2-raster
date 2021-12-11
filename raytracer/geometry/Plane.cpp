@@ -44,8 +44,8 @@ std::string Plane::to_string() const
 }
 bool Plane::hit(const Ray &ray, float &t, ShadeInfo &s) const
 {
-    //returns true if ray hits the plane
-    // Reference: Ray Tracing from the Ground Up by Kevin Suffern
+    // returns true if ray hits the plane
+    //  Reference: Ray Tracing from the Ground Up by Kevin Suffern
 
     float t_new = ((a - ray.o) * n) / (ray.d * n);
     if (t_new > kEpsilon)
@@ -58,6 +58,19 @@ bool Plane::hit(const Ray &ray, float &t, ShadeInfo &s) const
     }
     return false;
 }
+bool Plane::shadow_hit(const Ray &ray, double &tmin) const
+{
+    float t = (a - ray.o) * n / (ray.d * n);
+
+    if (t > kEpsilon)
+    {
+        tmin = t;
+        return (true);
+    }
+    else
+        return (false);
+}
+
 BBox Plane::getBBox() const
 {
     BBox bbox;

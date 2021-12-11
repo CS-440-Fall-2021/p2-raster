@@ -22,8 +22,11 @@ class Ray;
 class Sampler;
 class ShadeInfo;
 class Tracer;
+class Light;
+class Ambient;
 
-class World {
+class World
+{
 public:
   ViewPlane vplane;
   RGBColor bg_color;
@@ -31,6 +34,7 @@ public:
   Camera *camera_ptr;
   Sampler *sampler_ptr;
   Tracer *tracer;
+  Light *ambient_ptr;
 
 public:
   // Constructors.
@@ -42,6 +46,7 @@ public:
   // Add to the scene.
   void add_geometry(Geometry *geom_ptr);
   void set_camera(Camera *c_ptr);
+  void set_ambient_light(Ambient *amb_ptr);
 
   // Build scene - add all geometry, materials, lights, viewplane, camera,
   // samplers, and acceleration structures

@@ -7,6 +7,7 @@
 #include "../geometry/Geometry.hpp"
 #include "../utilities/ShadeInfo.hpp"
 #include "../tracers/Basic.hpp"
+#include "../lights/Ambient.hpp"
 #include "ViewPlane.hpp"
 #include "World.hpp"
 
@@ -19,6 +20,7 @@ World::World()
     camera_ptr = NULL;
     sampler_ptr = NULL;
     tracer = new Basic(this);
+    ambient_ptr = new Ambient;
 }
 
 World::~World()
@@ -27,6 +29,7 @@ World::~World()
     this->sampler_ptr = NULL;
     this->geometry.clear();
     delete tracer;
+    delete ambient_ptr;
 }
 
 void World::add_geometry(Geometry *geom_ptr)
@@ -41,7 +44,7 @@ void World::set_camera(Camera *c_ptr)
 
 ShadeInfo World::hit_objects(const Ray &ray)
 {
-    
+
     ShadeInfo shadeInfo(*this);
     ShadeInfo shadeInfoMin(*this);
     float t;
@@ -61,4 +64,13 @@ ShadeInfo World::hit_objects(const Ray &ray)
         }
     }
     return shadeInfoMin;
+}
+
+void World::set_ambient_light(Ambient *amb_ptr)
+{
+    if (ambient_ptr)
+    {
+        delete ambient_ptr;
+    }
+    ambient_ptr = amb_ptr->clone();
 }

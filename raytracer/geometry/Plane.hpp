@@ -12,7 +12,8 @@
 #include "../utilities/Point3D.hpp"
 #include "../utilities/Vector3D.hpp"
 
-class Plane : public Geometry {
+class Plane : public Geometry
+{
 protected:
   Point3D a;  // point on the plane.
   Vector3D n; // normal to the plane, store as unit vector.
@@ -29,13 +30,14 @@ public:
 
   // Destructor.
   virtual ~Plane() = default;
-  
+
   // String representation.
   virtual std::string to_string() const override;
 
   // Ray intersection. Set t and sinfo as per intersection with this object.
   virtual bool hit(const Ray &ray, float &t, ShadeInfo &s) const override;
-  
+
+  virtual bool shadow_hit(const Ray &ray, double &tmin) const;
   // Get bounding box.
   virtual BBox getBBox() const override;
 };

@@ -14,7 +14,8 @@ class Material;
 class Ray;
 class ShadeInfo;
 
-class Geometry {
+class Geometry
+{
 protected:
   Material *material_ptr; // this object's material.
 
@@ -28,7 +29,7 @@ public:
 
   // Destructor.
   virtual ~Geometry() = default;
-  
+
   // String representation.
   virtual std::string to_string() const = 0;
 
@@ -41,4 +42,6 @@ public:
 
   // Get bounding box.
   virtual BBox getBBox() const = 0;
+
+  virtual bool shadow_hit(const Ray &ray, double &t) const;
 };
