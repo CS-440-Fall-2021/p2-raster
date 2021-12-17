@@ -10,7 +10,8 @@
 
 class Vector3D;
 
-class Point3D {
+class Point3D
+{
 public:
   float x, y, z; // the co-ordinates.
 
@@ -29,7 +30,7 @@ public:
 
   // String representation.
   std::string to_string() const;
-  
+
   // Arithmetic.
   Point3D operator-() const;                  // unary minus.
   Vector3D operator-(const Point3D &p) const; // vector joining two points
@@ -46,5 +47,9 @@ public:
 Point3D operator*(const float a, const Point3D &pt);
 
 // Compare points.
-Point3D min(const Point3D& a, const Point3D& b);
-Point3D max(const Point3D& a, const Point3D& b);
+Point3D min(const Point3D &a, const Point3D &b);
+Point3D max(const Point3D &a, const Point3D &b);
+
+Point3D interpolate(const Point3D &a, const Point3D &b,
+                    const Point3D &c, const Point3D &x,
+                    const Point3D &y);

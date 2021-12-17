@@ -83,3 +83,12 @@ Point3D max(const Point3D &a, const Point3D &b)
 {
     return Point3D(std::max(a.x, b.x), std::max(a.y, b.y), std::max(a.z, b.z));
 }
+
+Point3D interpolate(const Point3D &a, const Point3D &b,
+                    const Point3D &c, const Point3D &x,
+                    const Point3D &y)
+{
+    return Point3D(x.x + (c.x - a.x) / (b.x - a.x) * (y.x - x.x),
+                   x.y + (c.y - a.y) / (b.y - a.y) * (y.y - x.y),
+                   x.z + (c.z - a.z) / (b.z - a.z) * (y.z - x.z));
+}

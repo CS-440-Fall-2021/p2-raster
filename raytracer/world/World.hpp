@@ -55,4 +55,7 @@ public:
   // Returns appropriate shading information corresponding to intersection of
   // the ray with the scene geometry.
   ShadeInfo hit_objects(const Ray &ray);
+
+  void add_ply(std::string fname, Material *mPtr, Point3D bottom,
+               Point3D top, bool makeSmooth);
 };

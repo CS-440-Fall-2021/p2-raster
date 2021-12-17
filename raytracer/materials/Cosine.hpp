@@ -14,7 +14,8 @@
 
 #include "../utilities/RGBColor.hpp"
 
-class Cosine : public Material {
+class Cosine : public Material
+{
 protected:
   RGBColor color; // the color of the material.
 
@@ -37,4 +38,7 @@ public:
      Assuming unit vectors, cos \theta = dot product of normal and -ray.dir.
   */
   virtual RGBColor shade(const ShadeInfo &sinfo) const override;
+
+  // Virtual copy constructor.
+  virtual Cosine *clone() const;
 };

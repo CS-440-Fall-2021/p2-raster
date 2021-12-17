@@ -42,3 +42,5 @@ RGBColor Cosine::shade(const ShadeInfo &sinfo) const
 {
     return this->color * (sinfo.normal * -sinfo.ray.d);
 }
+
+Cosine *Cosine::clone() const { return new Cosine(*this); }
