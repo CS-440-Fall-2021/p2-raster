@@ -13,6 +13,10 @@
 #include "../geometry/Sphere.hpp"
 
 #include "../materials/Cosine.hpp"
+#include "../materials/Phong.hpp"
+
+#include "../lights/Ambient.hpp"
+#include "../lights/Point.hpp"
 
 #include "../samplers/Simple.hpp"
 
@@ -30,8 +34,8 @@ void World::build(void)
     vplane.bottom_right.x = 200;
     vplane.bottom_right.y = -200;
     vplane.bottom_right.z = 100;
-    vplane.hres = 400;
-    vplane.vres = 400;
+    vplane.hres = 1000;
+    vplane.vres = 1000;
 
     bg_color = white; // background color.
 
@@ -51,7 +55,24 @@ void World::build(void)
     RGBColor darkPurple(0.5, 0, 1);      // dark purple
     RGBColor grey(0.25);                 // grey
 
-    add_ply("models/bearded.ply", new Cosine(yellow), Point3D(5, 3, 0), Point3D(45, -7, -60), false);
+    Ambient *ambient_ptr = new Ambient;
+    ambient_ptr->scale_radiance(0.5);
+    set_ambient_light(ambient_ptr);
+
+    Point *light_ptr = new Point;
+    light_ptr->set_position(100, 100, 100);
+    light_ptr->scale_radiance(3.0);
+    add_light(light_ptr);
+
+    Phong *pointerPH = new Phong();
+
+    pointerPH->set_cd(0.8);
+    pointerPH->set_exp(0.12);
+    pointerPH->set_ka(0.3);
+    pointerPH->set_kd(0.5);
+    pointerPH->set_ks(0.6);
+
+    add_ply("models/knight.ply", pointerPH, Point3D(5, 3, -5), Point3D(100, 100, -5), true);
 
     //   // spheres
     //   Sphere* sphere_ptr1 = new Sphere(Point3D(5, 3, 0), 30);

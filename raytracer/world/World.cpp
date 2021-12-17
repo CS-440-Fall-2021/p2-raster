@@ -5,6 +5,7 @@
 #include "../geometry/Plane.hpp"
 #include "../samplers/Sampler.hpp"
 #include "../geometry/Geometry.hpp"
+#include "../geometry/SmoothTriangle.hpp"
 #include "../utilities/ShadeInfo.hpp"
 #include "../tracers/Basic.hpp"
 #include "../lights/Ambient.hpp"
@@ -147,22 +148,22 @@ void World::add_ply(std::string fname, Material *mPtr, Point3D bottom,
         }
     }
 
-    // if (makeSmooth)
-    // {
-    //     for (size_t n = 0; n < normals.size(); ++n)
-    //     {
-    //         normals[n].normalize();
-    //     }
-    //     // add smooth triangles
-    //     for (std::vector<size_t> face : fInd)
-    //     {
-    //         SmoothTriangle *fSTriangle = new SmoothTriangle(
-    //             points[face[0]], points[face[1]], points[face[2]], normals[face[0]],
-    //             normals[face[1]], normals[face[2]]);
-    //         fSTriangle->set_material(mPtr->clone());
-    //         add_geometry(fSTriangle);
-    //     }
-    // }
+    if (makeSmooth)
+    {
+        for (size_t n = 0; n < normals.size(); ++n)
+        {
+            normals[n].normalize();
+        }
+        // add smooth triangles
+        for (std::vector<size_t> face : fInd)
+        {
+            SmoothTriangle *fSTriangle = new SmoothTriangle(
+                points[face[0]], points[face[1]], points[face[2]], normals[face[0]],
+                normals[face[1]], normals[face[2]]);
+            fSTriangle->set_material(mPtr->clone());
+            add_geometry(fSTriangle);
+        }
+    }
 
     delete mPtr;
 }
