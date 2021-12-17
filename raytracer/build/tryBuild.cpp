@@ -13,6 +13,8 @@
 
 #include "../materials/Cosine.hpp"
 #include "../materials/Phong.hpp"
+#include "../materials/matte.hpp"
+#include "../materials/reflective.hpp"
 
 // #include "../materials/Matte.h"
 // #include "../materials/Reflective.hpp"
@@ -34,8 +36,8 @@ void World::build(void)
     vplane.bottom_right.x = 200;
     vplane.bottom_right.y = -200;
     vplane.bottom_right.z = 100;
-    vplane.hres = 1000;
-    vplane.vres = 1000;
+    vplane.hres = 500;
+    vplane.vres = 500;
     //   vplane.(1);
     bg_color = white; // background color.
 
@@ -67,14 +69,18 @@ void World::build(void)
     RGBColor darkPurple(0.5, 0, 1);      // dark purple
     RGBColor grey(0.25);                 // grey
 
-    //   Reflective* reflective_ptr1 = new Reflective;
-    // 	reflective_ptr1->set_ka(0.25);
-    // 	reflective_ptr1->set_kd(0.5);
-    // 	reflective_ptr1->set_cd(0, 0, 1);    	// yellow
-    // 	reflective_ptr1->set_ks(0.15);
-    // 	reflective_ptr1->set_exp(100.0);
-    // 	reflective_ptr1->set_kr(0.75);
-    // 	reflective_ptr1->set_cr(0.65, 1, 0.30); 			// default color*/
+    Reflective *reflective_ptr1 = new Reflective;
+    reflective_ptr1->set_ka(0.25);
+    reflective_ptr1->set_kd(0.5);
+    reflective_ptr1->set_cd(0, 0, 1); // yellow
+    reflective_ptr1->set_ks(0.15);
+    reflective_ptr1->set_exp(50.0);
+    reflective_ptr1->set_kr(0.75);
+    reflective_ptr1->set_cr(0.65, 1, 0.30); // default color*/
+
+    // Sphere *sphere_ptr4 = new Sphere(Point3D(-100, -80, 0), 60);
+    // sphere_ptr4->set_material(reflective_ptr1);
+    // add_geometry(sphere_ptr4);
 
     // 	// orange non-reflective sphere
     // 	Matte* matte_ptr1 = new Matte;
@@ -90,17 +96,17 @@ void World::build(void)
     pointerPH->set_ks(0.2);
 
     Sphere *sphere_ptr1 = new Sphere(Point3D(-100, 60, 0), 60);
-    sphere_ptr1->set_material(pointerPH);
+    sphere_ptr1->set_material(reflective_ptr1);
     add_geometry(sphere_ptr1);
 
-    // Sphere *sphere_ptr2 = new Sphere(Point3D(100, 60, 0), 60);
-    // sphere_ptr2->set_material(matte_ptr1);
-    // add_geometry(sphere_ptr2);
+    Matte *matte_ptr2 = new Matte;
+    matte_ptr2->set_ka(0.45);
+    matte_ptr2->set_kd(0.75);
+    matte_ptr2->set_cd(0.65, 1, 0.30);
 
-    // Matte *matte_ptr2 = new Matte;
-    // matte_ptr2->set_ka(0.45);
-    // matte_ptr2->set_kd(0.75);
-    // matte_ptr2->set_cd(0.65, 1, 0.30);
+    Sphere *sphere_ptr2 = new Sphere(Point3D(100, 60, 0), 60);
+    sphere_ptr2->set_material(matte_ptr2);
+    add_geometry(sphere_ptr2);
 
     Plane *plane_ptr = new Plane(Point3D(0, 1, 0), Vector3D(0, 2, 2));
     plane_ptr->set_material(new Cosine(yellow));

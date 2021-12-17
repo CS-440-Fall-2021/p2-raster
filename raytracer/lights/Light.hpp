@@ -42,5 +42,6 @@ public:
     virtual ~Light() = default;
 
     bool casts_shadows() const;
+    
     virtual bool in_shadow(const Ray &ray, const ShadeInfo &si) const = 0;
 };
