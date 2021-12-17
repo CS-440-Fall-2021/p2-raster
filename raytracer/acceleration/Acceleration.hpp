@@ -13,6 +13,6 @@ protected:
 public:
     Acceleration(World *world_ptr);
     Acceleration() = default;
-    virtual ShadeInfo hit(const Ray &ray) = 0; // compute which object a ray hits
+    virtual ShadeInfo hit_objects(const Ray &ray) const = 0; // compute which object a ray hits
     virtual ~Acceleration() = default;
 };

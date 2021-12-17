@@ -26,8 +26,8 @@ World::World()
     camera_ptr = NULL;
     sampler_ptr = NULL;
     tracer = new Basic(this);
-    ambient_ptr = new Ambient();
-    acceleration_ptr = nullptr;
+    ambient_ptr = new Ambient;
+    acceleration_ptr = new KDTree(this);
     // tracer = NULL;
 }
 
@@ -66,6 +66,11 @@ void World::set_camera(Camera *c_ptr)
 
 ShadeInfo World::hit_objects(const Ray &ray)
 {
+    if (acceleration_ptr != NULL)
+    {
+        // fprintf(stdout, "At Pixel");
+        return acceleration_ptr->hit_objects(ray);
+    }
 
     ShadeInfo shadeInfo(*this);
     ShadeInfo shadeInfoMin(*this);

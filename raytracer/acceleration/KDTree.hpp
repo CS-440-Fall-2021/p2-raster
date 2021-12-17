@@ -27,5 +27,5 @@ public:
     virtual ~KDTree();
 
     // Calculates which object a ray hits
-    virtual ShadeInfo hit_objects(const Ray &ray);
+    virtual ShadeInfo hit_objects(const Ray &ray) const override;
 };

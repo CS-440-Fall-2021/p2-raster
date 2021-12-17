@@ -108,21 +108,49 @@ bool BBox::hit(const Ray &ray) const
         tz_min = (pmax.z - ray.o.z) * c;
         tz_max = (pmin.z - ray.o.z) * c;
     }
-    double t_enter, t_exit;
-    t_enter = std::max(std::max(tx_min, ty_min), tz_min);
-    t_exit = std::min(std::min(tx_max, ty_max), tz_max);
-    bool val = ((t_enter < t_exit) && (t_exit > kEpsilon));
-    return val;
+    // double t_enter, t_exit;
+    // t_enter = std::max(std::max(tx_min, ty_min), tz_min);
+    // t_exit = std::min(std::min(tx_max, ty_max), tz_max);
+    // bool val = ((t_enter < t_exit) && (t_exit > kEpsilon));
+    // return val;
+    double t0, t1;
+
+    // find largest entering t value
+    if (tx_min > ty_min)
+        t0 = tx_min;
+    else
+        t0 = ty_min;
+
+    if (tz_min > t0)
+        t0 = tz_min;
+
+    // find smallest exiting t value
+    if (tx_max < ty_max)
+        t1 = tx_max;
+    else
+        t1 = ty_max;
+
+    if (tz_max < t1)
+        t1 = tz_max;
+
+    return (t0 < t1 && t1 > kEpsilon);
 }
 void BBox::extend(Geometry *g)
 {
     this->pmax = max(g->getBBox().pmax, pmax);
     this->pmin = min(g->getBBox().pmin, pmin);
 }
-void BBox::extend(const BBox &b)
+// void BBox::extend(const BBox &b)
+// {
+//     this->pmax = max(b.pmax, this->pmax);
+//     this->pmin = min(b.pmin, this->pmin);
+// }
+
+BBox BBox::extend(const BBox &b)
 {
-    this->pmax = max(b.pmax, this->pmax);
-    this->pmin = min(b.pmin, this->pmin);
+    Point3D most_positive_ = max(b.pmax, this->pmax);
+    Point3D most_negative_ = min(b.pmin, this->pmin);
+    return BBox(most_negative_, most_positive_);
 }
 
 bool BBox::contains(const Point3D &p)
@@ -134,6 +162,7 @@ bool BBox::contains(const Point3D &p)
     }
     return false;
 }
+
 
 bool BBox::overlaps(Geometry *g)
 {

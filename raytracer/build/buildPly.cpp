@@ -7,24 +7,29 @@
 #include "../lights/Ambient.hpp"
 #include "../lights/Point.hpp"
 
+#include "../acceleration/KDTree.hpp"
+
 #include "../utilities/Constants.hpp"
 #include "../utilities/Vector3D.hpp"
 #include "../world/World.hpp"
 
-void World::build(void) {
+void World::build(void)
+{
   // view plane
   vplane.top_left = Point3D(-1, 1, 2);
   vplane.bottom_right = Point3D(1, -1, 2);
   vplane.hres = 800;
   vplane.vres = 800;
+  acceleration_ptr = new KDTree(this);
 
   RGBColor grey(0.25);
 
-  bg_color = grey;  // background color.
+  bg_color = grey; // background color.
 
   // camera and sampler.
   set_camera(new Perspective(0, 0, 10));
   sampler_ptr = new Simple(camera_ptr, &vplane);
+  set_acceleration(acceleration_ptr);
 
   Phong *pointerPH = new Phong;
   pointerPH->set_cd(0.45);
@@ -48,6 +53,6 @@ void World::build(void) {
   // pointerPH->set_cd(RGBColor(0,0,1));
 
   // filename goes here
-  add_ply("models/knight.ply", pointerPH, Point3D(-1, -1, -1),
+  add_ply("models/pawn.ply", pointerPH, Point3D(-1, -1, -1),
           Point3D(1, 1, 1), true);
 }
