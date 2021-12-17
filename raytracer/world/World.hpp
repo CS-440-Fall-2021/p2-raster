@@ -24,6 +24,7 @@ class ShadeInfo;
 class Tracer;
 class Light;
 class Ambient;
+class Acceleration;
 
 class World
 {
@@ -36,6 +37,7 @@ public:
   Sampler *sampler_ptr;
   Tracer *tracer;
   Light *ambient_ptr;
+  Acceleration *acceleration_ptr;
 
 public:
   // Constructors.
@@ -50,6 +52,7 @@ public:
   void set_ambient_light(Ambient *amb_ptr);
   void add_light(Light *light_ptr);
   void set_tracer(Tracer *t_ptr);
+  void set_acceleration(Acceleration *acceleration_ptr);
 
   // void set_ambient_light(Ambient *amb_ptr);
 

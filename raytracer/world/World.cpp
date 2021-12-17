@@ -9,6 +9,8 @@
 #include "../utilities/ShadeInfo.hpp"
 #include "../tracers/Basic.hpp"
 #include "../lights/Ambient.hpp"
+#include "../acceleration/Acceleration.hpp"
+#include "../acceleration/KDTree.hpp"
 #include "../happly/happly.h"
 #include "ViewPlane.hpp"
 #include "World.hpp"
@@ -25,6 +27,7 @@ World::World()
     sampler_ptr = NULL;
     tracer = new Basic(this);
     ambient_ptr = new Ambient();
+    acceleration_ptr = nullptr;
     // tracer = NULL;
 }
 
@@ -36,6 +39,9 @@ World::~World()
     this->lights.clear();
     delete tracer;
     delete ambient_ptr;
+    delete acceleration_ptr;
+    delete sampler_ptr;
+    delete camera_ptr;
 }
 
 void World::set_tracer(Tracer *t_ptr)
@@ -166,4 +172,9 @@ void World::add_ply(std::string fname, Material *mPtr, Point3D bottom,
     }
 
     delete mPtr;
+}
+
+void World::set_acceleration(Acceleration *_acceleration_ptr)
+{
+    acceleration_ptr = _acceleration_ptr;
 }

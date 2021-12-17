@@ -36,7 +36,6 @@ void KDNode::add_primitive(Geometry *primitive)
 void KDNode::build_kd_tree(KDNode *node)
 {
 
-
     BBox current_bb = node->bb;
 
     int splitaxis = current_bb.maximum_axis(); // split along longest axis

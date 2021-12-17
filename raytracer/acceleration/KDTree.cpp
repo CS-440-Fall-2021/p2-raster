@@ -1,6 +1,9 @@
 #include "KDTree.hpp"
 #include <stack>
 #include "../utilities/BBox.hpp"
+#include "../utilities/Ray.hpp"
+#include "../utilities/ShadeInfo.hpp"
+#include "../world/World.hpp"
 
 KDTree::KDTree(World *world)
     : world_ptr{world}, root_node{new KDNode(world->geometry)}
