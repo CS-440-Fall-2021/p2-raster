@@ -31,6 +31,7 @@ public:
   ViewPlane vplane;
   RGBColor bg_color;
   std::vector<Geometry *> geometry;
+  std::vector<Light *> lights;
   Camera *camera_ptr;
   Sampler *sampler_ptr;
   Tracer *tracer;
@@ -47,6 +48,10 @@ public:
   void add_geometry(Geometry *geom_ptr);
   void set_camera(Camera *c_ptr);
   void set_ambient_light(Ambient *amb_ptr);
+  void add_light(Light *light_ptr);
+  void set_tracer(Tracer *t_ptr);
+
+  // void set_ambient_light(Ambient *amb_ptr);
 
   // Build scene - add all geometry, materials, lights, viewplane, camera,
   // samplers, and acceleration structures

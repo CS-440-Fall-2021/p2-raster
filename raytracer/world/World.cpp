@@ -20,7 +20,8 @@ World::World()
     camera_ptr = NULL;
     sampler_ptr = NULL;
     tracer = new Basic(this);
-    ambient_ptr = new Ambient;
+    ambient_ptr = new Ambient();
+    // tracer = NULL;
 }
 
 World::~World()
@@ -28,13 +29,24 @@ World::~World()
     this->camera_ptr = NULL;
     this->sampler_ptr = NULL;
     this->geometry.clear();
+    this->lights.clear();
     delete tracer;
     delete ambient_ptr;
+}
+
+void World::set_tracer(Tracer *t_ptr)
+{
+    tracer = t_ptr;
 }
 
 void World::add_geometry(Geometry *geom_ptr)
 {
     geometry.push_back(geom_ptr);
+}
+
+void World::add_light(Light *light_ptr)
+{
+    lights.push_back(light_ptr);
 }
 
 void World::set_camera(Camera *c_ptr)

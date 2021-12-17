@@ -10,7 +10,8 @@
 class RGBColor;
 class ShadeInfo;
 
-class Material {
+class Material
+{
 public:
   // Constructors.
   Material() = default; // does nothing.
@@ -21,6 +22,8 @@ public:
 
   // Desctructor.
   virtual ~Material() = default;
+
+  virtual Material *clone() const = 0;
 
   // Get color.
   virtual RGBColor shade(const ShadeInfo &sinfo) const = 0;
