@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
     for (int y = 0; y < viewplane.vres; y++) { // down.
       // Get rays for the pixel from the sampler. The pixel color is the
       // weighted sum of the shades for each ray.
-      // if ((y % viewplane.vres) == 0)
+      // if ((x % 100) == 0)
       //   fprintf(stdout, "At Pixel (%d, %d)\n",  x, y);
 
       RGBColor pixel_color(0);
