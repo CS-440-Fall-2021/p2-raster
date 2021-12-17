@@ -35,6 +35,7 @@ public:
 
   // Does ray hit bbox? If so, set entering and leaving t values for ray.
   bool hit(const Ray &ray, float &t_enter, float &t_exit) const;
+  bool hit(const Ray &ray) const;
 
   // Extend this bbox, if necessary, to include g or b.
   void extend(Geometry *g);
@@ -46,4 +47,6 @@ public:
   // Does this BBox overlap with g or b?
   bool overlaps(Geometry *g);
   bool overlaps(const BBox &b);
+
+  int maximum_axis() const;
 };

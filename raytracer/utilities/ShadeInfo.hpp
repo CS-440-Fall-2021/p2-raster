@@ -18,7 +18,8 @@
 class Material;
 class World;
 
-class ShadeInfo {
+class ShadeInfo
+{
 public:
   bool hit;               // did the ray hit an object?
   Material *material_ptr; // pointer to the material of the nearest hit object.

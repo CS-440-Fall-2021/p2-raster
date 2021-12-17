@@ -28,5 +28,10 @@ const RGBColor red(1.0, 0.0, 0.0);
 const RGBColor green(0.0, 1.0, 0.0);
 const RGBColor blue(0.0, 0.0, 1.0);
 
+// standard axis
+const size_t X_AXIS = 0;
+const size_t Y_AXIS = 1;
+const size_t Z_AXIS = 2;
+
 // Useful for scaling the output of rand() to [0,1].
 const float invRAND_MAX = 1.0 / (float)RAND_MAX;
