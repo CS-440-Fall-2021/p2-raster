@@ -26,6 +26,8 @@ public:
   // Virtual copy constructor.
   virtual Material *clone() const = 0;
 
+  // virtual RGBColor area_light_shade(ShadeInfo &sr);
+
   // Get color.
   virtual RGBColor shade(const ShadeInfo &sinfo) const = 0;
 };
