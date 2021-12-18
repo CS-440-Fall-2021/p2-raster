@@ -27,7 +27,7 @@ World::World()
     sampler_ptr = NULL;
     tracer = new Basic(this);
     ambient_ptr = new Ambient;
-    acceleration_ptr = new KDTree(this);
+    acceleration_ptr = NULL;
     // tracer = NULL;
 }
 

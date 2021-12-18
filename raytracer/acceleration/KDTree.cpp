@@ -32,7 +32,7 @@ ShadeInfo KDTree::hit_objects(const Ray &ray) const
             // we are at leaf node, this is where we intersect with geometry
             for (Geometry *geom : current->primitives)
             {
-                if (geom->hit(ray, t, sinfocur) &&( t < tmin))
+                if (geom->hit(ray, t, sinfocur) && (t < tmin))
                 {
                     tmin = t;
                     sinfomin = sinfocur;

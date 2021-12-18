@@ -118,3 +118,8 @@ BBox Sphere::getBBox() const // returns a bounding box for the sphere
 {
     return BBox(Point3D(c.x - r, c.y - r, c.z - r), Point3D(c.x + r, c.y + r, c.z + r));
 }
+
+Point3D Sphere::getCenter() const
+{
+    return c;
+}

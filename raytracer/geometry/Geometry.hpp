@@ -42,6 +42,7 @@ public:
 
   // Get bounding box.
   virtual BBox getBBox() const = 0;
+  virtual Point3D getCenter() const = 0;
 
   virtual bool shadow_hit(const Ray &ray, double &t) const;
 };

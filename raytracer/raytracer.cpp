@@ -15,6 +15,7 @@
 #include "world/ViewPlane.hpp"
 
 #include "acceleration/KDtree.hpp"
+#include "acceleration/BVH.hpp"
 
 #include <chrono>
 using namespace std;
@@ -28,7 +29,7 @@ int main(int argc, char **argv)
   Sampler *sampler = world.sampler_ptr;
   ViewPlane &viewplane = world.vplane;
   Image image(viewplane);
-  world.set_acceleration(new KDTree(&world));
+  world.set_acceleration(new BVH(&world));
   auto start = high_resolution_clock::now();
   std::vector<Ray> rays;
   for (int x = 0; x < viewplane.hres; x++)

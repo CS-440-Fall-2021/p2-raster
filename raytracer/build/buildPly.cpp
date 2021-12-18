@@ -6,9 +6,7 @@
 #include "../samplers/Simple.hpp"
 #include "../lights/Ambient.hpp"
 #include "../lights/Point.hpp"
-
 #include "../acceleration/KDTree.hpp"
-
 #include "../utilities/Constants.hpp"
 #include "../utilities/Vector3D.hpp"
 #include "../world/World.hpp"
@@ -20,7 +18,7 @@ void World::build(void)
   vplane.bottom_right = Point3D(1, -1, 2);
   vplane.hres = 800;
   vplane.vres = 800;
-  acceleration_ptr = new KDTree(this);
+  // acceleration_ptr = new KDTree(this);
 
   RGBColor grey(0.25);
 
@@ -29,7 +27,7 @@ void World::build(void)
   // camera and sampler.
   set_camera(new Perspective(0, 0, 10));
   sampler_ptr = new Simple(camera_ptr, &vplane);
-  set_acceleration(acceleration_ptr);
+  set_acceleration(NULL);
 
   Phong *pointerPH = new Phong;
   pointerPH->set_cd(0.45);
@@ -43,16 +41,22 @@ void World::build(void)
   // set_ambient_light(ambient_ptr);
 
   Point *light_ptr = new Point;
+  light_ptr->set_shadows(true);
   light_ptr->set_position(1, 1, 1);
   light_ptr->scale_radiance(3.0);
   add_light(light_ptr);
 
-  // Matte *pointerPH = new Matte;
-  // pointerPH->set_ka(0.2);
-  // pointerPH->set_kd(3);
-  // pointerPH->set_cd(RGBColor(0,0,1));
+  Matte *pointerMT = new Matte;
+  pointerMT->set_ka(0.2);
+  pointerMT->set_kd(3);
+  pointerMT->set_cd(RGBColor(0, 0, 1));
+
+  Plane *plane_ptr = new Plane(Point3D(0, -1, 0), Vector3D(0, 10, 2));
+  plane_ptr->set_material(pointerMT);
+
+  add_geometry(plane_ptr);
 
   // filename goes here
-  add_ply("models/pawn.ply", pointerPH, Point3D(-1, -1, -1),
+  add_ply("models/knight.ply", pointerPH, Point3D(-1, -1, -1),
           Point3D(1, 1, 1), true);
 }

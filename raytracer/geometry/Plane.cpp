@@ -76,3 +76,8 @@ BBox Plane::getBBox() const
     BBox bbox;
     return bbox;
 }
+
+Point3D Plane::getCenter() const
+{
+    return a;
+}

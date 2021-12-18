@@ -50,6 +50,7 @@ Vector3D Point::get_direction(const ShadeInfo &s) const
 // luminance from this light source at hit Point
 RGBColor Point::L() const
 {
+    // Vector3D distance(0, 1, 0);
     return ls * color;
 }
 

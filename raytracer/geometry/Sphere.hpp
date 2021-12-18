@@ -40,4 +40,6 @@ public:
 
   // Get bounding box.
   virtual BBox getBBox() const override;
+
+  Point3D getCenter() const;
 };

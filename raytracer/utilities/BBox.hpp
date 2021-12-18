@@ -50,4 +50,6 @@ public:
   bool overlaps(const BBox &b);
 
   int maximum_axis() const;
+
+  void extend(const Point3D &p);
 };

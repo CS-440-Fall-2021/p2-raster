@@ -163,7 +163,6 @@ bool BBox::contains(const Point3D &p)
     return false;
 }
 
-
 bool BBox::overlaps(Geometry *g)
 {
     BBox g_box = g->getBBox();
@@ -200,4 +199,11 @@ int BBox::maximum_axis() const
     }
 
     return Z_AXIS;
+}
+
+void BBox::extend(const Point3D &p)
+{
+    this->pmin = min(pmin, p);
+    this->pmax = max(pmax, p);
+    // delta = pmax - pmin;
 }
