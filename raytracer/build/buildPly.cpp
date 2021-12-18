@@ -27,7 +27,7 @@ void World::build(void)
   // camera and sampler.
   set_camera(new Perspective(0, 0, 10));
   sampler_ptr = new Simple(camera_ptr, &vplane);
-  set_acceleration(NULL);
+  // set_acceleration(NULL);
 
   Phong *pointerPH = new Phong;
   pointerPH->set_cd(0.45);

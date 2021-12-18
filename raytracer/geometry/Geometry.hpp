@@ -13,6 +13,7 @@ class BBox;
 class Material;
 class Ray;
 class ShadeInfo;
+class Point3D;
 
 class Geometry
 {

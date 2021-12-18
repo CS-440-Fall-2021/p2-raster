@@ -14,39 +14,42 @@
 #include "../utilities/Vector3D.hpp"
 #include "Geometry.hpp"
 
-class SmoothTriangle : public Geometry {
- protected:
-  Point3D v0, v1, v2;   // the vertices. they must not be colinear.
-  Vector3D n0, n1, n2;  // unit vectors normal to each point
+class SmoothTriangle : public Geometry
+{
+protected:
+   Point3D v0, v1, v2;  // the vertices. they must not be colinear.
+   Vector3D n0, n1, n2; // unit vectors normal to each point
 
- public:
-  // Constructors. Passed vertices are assumed to be ordered for orientation,
-  SmoothTriangle();  // triangle with vertices at origin and norm along z axis
-  SmoothTriangle(const Point3D& a, const Point3D& b, const Point3D& c,
-                 const Vector3D& na, const Vector3D& nb,
-                 const Vector3D& nc);  // set vertices and
+public:
+   // Constructors. Passed vertices are assumed to be ordered for orientation,
+   SmoothTriangle(); // triangle with vertices at origin and norm along z axis
+   SmoothTriangle(const Point3D &a, const Point3D &b, const Point3D &c,
+                  const Vector3D &na, const Vector3D &nb,
+                  const Vector3D &nc); // set vertices and
                                        // normal vectors
 
-  // Copy constructor and assignment operator.
-  SmoothTriangle(const SmoothTriangle& object) = default;
-  SmoothTriangle& operator=(const SmoothTriangle& rhs) = default;
+   // Copy constructor and assignment operator.
+   SmoothTriangle(const SmoothTriangle &object) = default;
+   SmoothTriangle &operator=(const SmoothTriangle &rhs) = default;
 
-  // Destructor.
-  virtual ~SmoothTriangle() = default;
+   // Destructor.
+   virtual ~SmoothTriangle() = default;
 
-  virtual std::string to_string() const override;
+   virtual std::string to_string() const override;
 
-  // Virtual copy constructor.
-  virtual SmoothTriangle* clone() const;
+   // Virtual copy constructor.
+   virtual SmoothTriangle *clone() const;
 
-  // Ray intersection. Set sinfo as per intersection with this object.
-  virtual bool hit(const Ray& ray, float& t, ShadeInfo& s) const override;
+   // Ray intersection. Set sinfo as per intersection with this object.
+   virtual bool hit(const Ray &ray, float &t, ShadeInfo &s) const override;
 
-  // Bounding box computation.
-  virtual BBox getBBox() const override;
+   // Bounding box computation.
+   virtual BBox getBBox() const override;
 
-  // Calculates the normal for a given beta and gamma.
-  Vector3D interpolate_normal(const double beta, const double gamma) const;
+   // Calculates the normal for a given beta and gamma.
+   Vector3D interpolate_normal(const double beta, const double gamma) const;
+
+   Point3D getCenter() const;
 };
 
-#endif  // RAYTRACER_GEOMETRY_SMOOTHTRIANGLE_HPP_
+#endif // RAYTRACER_GEOMETRY_SMOOTHTRIANGLE_HPP_
