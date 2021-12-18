@@ -40,7 +40,7 @@ public:
   // Extend this bbox, if necessary, to include g or b.
   void extend(Geometry *g);
   // void extend(const BBox &b);
-  BBox extend(const BBox &b);
+  void extend(const BBox &b);
 
   // Does this BBox contain p? True even when p lies on a boundary.
   bool contains(const Point3D &p);

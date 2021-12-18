@@ -50,10 +50,13 @@ bool Plane::hit(const Ray &ray, float &t, ShadeInfo &s) const
     float t_new = ((a - ray.o) * n) / (ray.d * n);
     if (t_new > kEpsilon)
     {
-        t = t_new;
-        s.hit_point = ray.o + (t * ray.d);
+        s.hit = true;
+        s.material_ptr = this->get_material();
+        s.hit_point = ray.o + (t_new * ray.d);
         s.normal = n;
-        s.normal.normalize();
+        s.ray = ray;
+        s.t = t_new;
+        t = t_new;
         return true;
     }
     return false;

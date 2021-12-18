@@ -146,11 +146,14 @@ void BBox::extend(Geometry *g)
 //     this->pmin = min(b.pmin, this->pmin);
 // }
 
-BBox BBox::extend(const BBox &b)
+void BBox::extend(const BBox &b)
 {
-    Point3D most_positive_ = max(b.pmax, this->pmax);
-    Point3D most_negative_ = min(b.pmin, this->pmin);
-    return BBox(most_negative_, most_positive_);
+    // Point3D most_positive_ = max(b.pmax, this->pmax);
+    // Point3D most_negative_ = min(b.pmin, this->pmin);
+    // return BBox(most_negative_, most_positive_);
+
+    pmax = max(b.pmax, pmax);
+    pmin = min(b.pmin, pmin);
 }
 
 bool BBox::contains(const Point3D &p)

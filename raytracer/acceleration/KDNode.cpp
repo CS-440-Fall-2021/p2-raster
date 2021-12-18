@@ -14,7 +14,7 @@ KDNode::KDNode(std::vector<Geometry *> _primitives)
     // compute bounding box containing all primitives
     for (Geometry *primitive : primitives)
     {
-        bb = bb.extend(primitive->getBBox());
+        bb.extend(primitive->getBBox());
     }
 }
 
@@ -29,9 +29,9 @@ void KDNode::add_primitive(Geometry *primitive, BBox new_bb)
 }
 void KDNode::add_primitive(Geometry *primitive)
 {
-    add_primitive(primitive, bb.extend(primitive->getBBox()));
-    // bb.extend(primitive->getBBox());
-    // add_primitive(primitive, bb);
+    // add_primitive(primitive, bb.extend(primitive->getBBox()));
+    bb.extend(primitive->getBBox());
+    add_primitive(primitive, bb);
 }
 
 void KDNode::build_kd_tree(KDNode *node)

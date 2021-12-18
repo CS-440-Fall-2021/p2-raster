@@ -27,7 +27,7 @@ void World::build(void)
   // camera and sampler.
   set_camera(new Perspective(0, 0, 10));
   sampler_ptr = new Simple(camera_ptr, &vplane);
-  // set_acceleration(NULL);
+  set_acceleration(NULL);
 
   Phong *pointerPH = new Phong;
   pointerPH->set_cd(0.45);
@@ -51,7 +51,7 @@ void World::build(void)
   pointerMT->set_kd(3);
   pointerMT->set_cd(RGBColor(0, 0, 1));
 
-  Plane *plane_ptr = new Plane(Point3D(0, -1, 0), Vector3D(0, 10, 2));
+  Plane *plane_ptr = new Plane(Point3D(0, -1, 0), Vector3D(10, 5, 0));
   plane_ptr->set_material(pointerMT);
 
   add_geometry(plane_ptr);

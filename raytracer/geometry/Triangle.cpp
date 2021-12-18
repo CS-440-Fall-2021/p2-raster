@@ -80,13 +80,21 @@ bool Triangle::hit(const Ray &ray, float &t, ShadeInfo &s) const
     if (t_ < kEpsilon)
         return (false);
 
-    t = t_;
+    // t = t_;
 
     // updating s
-    s.hit_point = ray.o + (t * ray.d);
+    // s.hit_point = ray.o + (t * ray.d);
+    // s.normal = ;
+    // s.normal.normalize();
+
+    s.hit = true;
+    s.material_ptr = this->get_material();
+    s.hit_point = ray.o + (t_ * ray.d);
     s.normal = (v1 - v0) ^ (v2 - v0);
     s.normal.normalize();
-
+    s.ray = ray;
+    s.t = t_;
+    t = t_;
     return (true);
 }
 bool Triangle::shadow_hit(const Ray &ray, double &tmin) const

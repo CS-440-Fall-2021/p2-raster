@@ -15,15 +15,15 @@ KDTree::~KDTree() { delete root_node; }
 
 ShadeInfo KDTree::hit_objects(const Ray &ray) const
 {
-    ShadeInfo sinfomin(*this->world_ptr);
-    ShadeInfo sinfocur(*this->world_ptr);
+    ShadeInfo sinfomin(*world_ptr);
+    ShadeInfo sinfocur(*world_ptr);
 
     std::stack<KDNode *> frontier;
     frontier.push(root_node);
 
     KDNode *current = frontier.top();
     float t;
-    float tmin = kHugeValue;
+    sinfomin.t = kHugeValue;
 
     while (!frontier.empty())
     {
@@ -32,14 +32,9 @@ ShadeInfo KDTree::hit_objects(const Ray &ray) const
             // we are at leaf node, this is where we intersect with geometry
             for (Geometry *geom : current->primitives)
             {
-                if (geom->hit(ray, t, sinfocur) && (t < tmin))
+                if (geom->hit(ray, t, sinfocur) && (sinfocur.t < sinfomin.t))
                 {
-                    tmin = t;
                     sinfomin = sinfocur;
-                    sinfomin.hit = true;
-                    sinfomin.material_ptr = geom->get_material();
-                    sinfomin.ray = ray;
-                    sinfomin.t = t;
                 }
             }
         }

@@ -61,19 +61,25 @@ bool Sphere::hit(const Ray &ray, float &t, ShadeInfo &s) const
         t_ = (-b - e) / denom;
         if (t_ > kEpsilon)
         {
-            t = t_;
-            s.normal = (temp + t * ray.d) / r;
+            s.hit = true;
+            s.material_ptr = this->get_material();
             s.hit_point = ray.o + (t_ * ray.d);
-            s.normal.normalize();
+            s.normal = (temp + t_ * ray.d) / r;
+            s.ray = ray;
+            s.t = t_;
+            t = t_;
             return true;
         }
         t_ = (-b + e) / denom;
         if (t > kEpsilon)
         {
+            s.hit = true;
+            s.material_ptr = this->get_material();
+            s.hit_point = ray.o + (t_ * ray.d);
+            s.normal = (temp + t_ * ray.d) / r;
+            s.ray = ray;
+            s.t = t_;
             t = t_;
-            s.normal = (temp + t * ray.d) / r;
-            s.normal.normalize();
-            s.hit_point = ray.o + t * ray.d;
             return true;
         }
     }

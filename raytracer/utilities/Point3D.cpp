@@ -92,3 +92,8 @@ Point3D interpolate(const Point3D &a, const Point3D &b,
                    x.y + (c.y - a.y) / (b.y - a.y) * (y.y - x.y),
                    x.z + (c.z - a.z) / (b.z - a.z) * (y.z - x.z));
 }
+
+bool Point3D::operator==(const Point3D &rhs) const
+{
+    return (x == rhs.x) && (y == rhs.y) && (z == rhs.z);
+}
