@@ -16,8 +16,8 @@ void World::build(void)
   // view plane
   vplane.top_left = Point3D(-1, 1, 2);
   vplane.bottom_right = Point3D(1, -1, 2);
-  vplane.hres = 800;
-  vplane.vres = 800;
+  vplane.hres = 200;
+  vplane.vres = 200;
   // acceleration_ptr = new KDTree(this);
 
   RGBColor grey(0.25);
@@ -51,12 +51,12 @@ void World::build(void)
   pointerMT->set_kd(3);
   pointerMT->set_cd(RGBColor(0, 0, 1));
 
-  Plane *plane_ptr = new Plane(Point3D(0, -1, 0), Vector3D(10, 5, 0));
-  plane_ptr->set_material(pointerMT);
+  // Plane *plane_ptr = new Plane(Point3D(0, -1, 0), Vector3D(10, 5, 0));
+  // plane_ptr->set_material(pointerMT);
 
-  add_geometry(plane_ptr);
+  // add_geometry(plane_ptr);
 
   // filename goes here
-  add_ply("models/knight.ply", pointerPH, Point3D(-1, -1, -1),
-          Point3D(1, 1, 1), true);
+  add_ply("models/charmander.ply", pointerPH, Point3D(1, 1, 3),
+          Point3D(-1, -1, -1), true);
 }
