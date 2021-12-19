@@ -40,15 +40,17 @@ void World::build(void)
     vplane.hres = 1980;
     vplane.vres = 1980;
 
-    bg_color = RGBColor(0.15);
+    // background color.
+    RGBColor grey(0.25);
+    bg_color = grey;
 
     // Camera and sampler.
     set_camera(new Perspective(0, 0, 20));
-    set_tracer(new Basic(this));
     sampler_ptr = new Simple(camera_ptr, &vplane);
 
-    int num = 10000;
-    for (int i = 0; i < num; i++)
+    // Generating random primitives
+    int primitives = 10000;
+    for (int i = 0; i < primitives; i++)
     {
         RGBColor c(((double)rand() / (RAND_MAX)), ((double)rand() / (RAND_MAX)), ((double)rand() / (RAND_MAX)));
         int randomX = (-10) + (rand() % static_cast<int>(10 - (-10) + 1));
