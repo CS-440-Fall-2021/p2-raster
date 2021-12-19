@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <omp.h>
+
 #include "materials/Cosine.hpp"
 
 #include "samplers/Sampler.hpp"
@@ -32,7 +34,10 @@ int main(int argc, char **argv)
   world.set_acceleration(new BVH((&world)));
   // world.set_acceleration(new KDTree((&world)));
   auto start = high_resolution_clock::now();
-  std::vector<Ray> rays;
+
+  omp_set_num_threads(12);
+
+  #pragma omp parallel for
   for (int x = 0; x < viewplane.hres; x++)
   { // across.
     for (int y = 0; y < viewplane.vres; y++)
@@ -41,6 +46,7 @@ int main(int argc, char **argv)
       // weighted sum of the shades for each ray.
       // if ((x % 100) == 0)
       //   fprintf(stdout, "At Pixel (%d, %d)\n",  x, y);
+      std::vector<Ray> rays;
 
       RGBColor pixel_color(0);
       rays = sampler->get_rays(x, y);
