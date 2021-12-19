@@ -1,4 +1,4 @@
-#include "perspective.hpp"
+#include "Perspective.hpp"
 #include "../utilities/Vector3D.hpp"
 
 Perspective::Perspective()
