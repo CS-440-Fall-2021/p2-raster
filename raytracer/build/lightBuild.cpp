@@ -24,7 +24,6 @@
 #include "../lights/Ambient.hpp"
 #include "../lights/Point.hpp"
 #include "../lights/Directional.hpp"
-#include "../lights/Spotlight.hpp"
 
 void World::build(void)
 {
