@@ -58,7 +58,7 @@ int main(int argc, char **argv)
   auto stop = high_resolution_clock::now();
 
   // Write image to file.
-  image.write_ppm("scene.ppm");
+  image.write_ppm("scene1.ppm");
 
   std::cout << "Wrote image.\n";
 
