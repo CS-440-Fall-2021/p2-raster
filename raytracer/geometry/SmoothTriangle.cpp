@@ -6,6 +6,7 @@
 #include "../utilities/ShadeInfo.hpp"
 #include "../utilities/Vector3D.hpp"
 #include "../utilities/BBox.hpp"
+#include <sstream>
 
 SmoothTriangle::SmoothTriangle() : n0{0, 0, 1}, n1{0, 0, 1}, n2{0, 0, 1} {}
 
@@ -82,6 +83,11 @@ BBox SmoothTriangle::getBBox() const
 }
 std::string SmoothTriangle::to_string() const
 {
+  std::stringstream stream;
+  stream << "Point v0: (" << v0.x << "," << v0.y << "," << v0.z << ")" << '\n';
+  stream << "Point v1: (" << v1.x << "," << v1.y << "," << v1.z << ")";
+  stream << "Point v2: (" << v2.x << "," << v2.y << "," << v2.z << ")";
+  return stream.str();
 }
 
 Point3D SmoothTriangle::getCenter() const

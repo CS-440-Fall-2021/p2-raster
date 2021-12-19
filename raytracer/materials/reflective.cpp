@@ -51,6 +51,7 @@ Reflective &Reflective::operator=(const Reflective &rhs)
     {
         reflective_brdf = new PerfectSpecular();
     }
+    return *this;
 }
 
 void Reflective::set_kr(const float k)
