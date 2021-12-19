@@ -3,6 +3,9 @@
 # CS 440 Computer Graphics, Fall 2021
 ***
 
+# Link to showcase page:
+[Team Raytracer](https://habib-university.github.io/teamraster)
+
 # Purpose
 
 This project extends the ray tracer developed in Homework 3. It implements some of the ray tracing topics we have covered, namely:
