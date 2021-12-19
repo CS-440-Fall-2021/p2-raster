@@ -57,6 +57,6 @@ void World::build(void)
   // add_geometry(plane_ptr);
 
   // filename goes here
-  add_ply("models/charmander.ply", pointerPH, Point3D(1, 1, 3),
-          Point3D(-1, -1, -1), true);
+  add_ply("models/charmander.ply", pointerPH, Point3D(1, -1, -1),
+          Point3D(-1, 1, -3), true);
 }
