@@ -41,6 +41,11 @@ void World::build(void)
     // Background color.
     bg_color = black;
 
+    // Camera and sampler.
+    set_camera(new Perspective(0, 0, 20));
+    sampler_ptr = new Simple(camera_ptr, &vplane);
+
+    // Material Pointers
     Phong *pointerPH1 = new Phong;
     pointerPH1->set_cd(0, 1, 0);
     pointerPH1->set_exp(100);
@@ -48,22 +53,21 @@ void World::build(void)
     pointerPH1->set_kd(3);
     pointerPH1->set_ks(0.2);
 
-    // Matte *pointerMT1 = new Matte;
-    // pointerMT1->set_ka(0.2);
-    // pointerMT1->set_kd(3);
-    // pointerMT1->set_cd(RGBColor(0, 1, 0));
+    Phong *pointerPH2 = new Phong;
+    pointerPH2->set_cd(1, 0, 0);
+    pointerPH2->set_exp(100);
+    pointerPH2->set_ka(0.2);
+    pointerPH2->set_kd(3);
+    pointerPH2->set_ks(0.2);
 
-    //   Reflective *reflective_ptr1 = new Reflective;
-    //   reflective_ptr1->set_ka(0.25);
-    //   reflective_ptr1->set_kd(0.5);
-    //   reflective_ptr1->set_cd(0,1,0); // green
-    //   reflective_ptr1->set_ks(0.15);
-    //   reflective_ptr1->set_exp(100.0);
-    //   reflective_ptr1->set_kr(0.75);
-    //   reflective_ptr1->set_cr(0.65, 1, 0.30); // default color*/
+    Phong *pointerPH = new Phong;
+    pointerPH->set_cd(0, 0, 1);
+    pointerPH->set_exp(100);
+    pointerPH->set_ka(0.2);
+    pointerPH->set_kd(3);
+    pointerPH->set_ks(0.2);
 
     // Lighting
-
     Ambient *ambient_ptr = new Ambient(1.0);
     ambient_ptr->scale_radiance(0.5);
     set_ambient_light(ambient_ptr);
@@ -80,51 +84,15 @@ void World::build(void)
     light_ptr1->set_shadows(true);
     add_light(light_ptr1);
 
-
     Directional *dir_ptr = new Directional;
     dir_ptr->set_direction(50, 50, 0);
     dir_ptr->set_color(RGBColor(1, 1, 1));
     add_light(dir_ptr);
 
-    // Spotlight *spot_ptr = new Spotlight(1);
-    // spot_ptr->set_theta(0.8);
-    // spot_ptr->scale_radiance(3.0);
-    // spot_ptr->set_position(100, 50, 100);
-    // spot_ptr->set_direction(50, 50, 0);
-    // spot_ptr->set_shadows(true);
-    // add_light(spot_ptr);
-
-    // Camera and sampler.
-    set_camera(new Perspective(0, 0, 20));
-    sampler_ptr = new Simple(camera_ptr, &vplane);
-
     // sphere
     Sphere *sphere_ptr = new Sphere(Point3D(-3, 2, 0), 5);
     sphere_ptr->set_material(pointerPH1);
     add_geometry(sphere_ptr);
-
-    Phong *pointerPH2 = new Phong;
-    pointerPH2->set_cd(1, 0, 0);
-    pointerPH2->set_exp(100);
-    pointerPH2->set_ka(0.2);
-    pointerPH2->set_kd(3);
-    pointerPH2->set_ks(0.2);
-
-    // Matte *pointerMT2 = new Matte;
-    // pointerMT2->set_ka(0.2);
-    // pointerMT2->set_kd(3);
-    // pointerMT2->set_cd(RGBColor(1, 0, 0));
-
-    //   Reflective *reflective_ptr12 = new Reflective;
-    //   reflective_ptr12->set_ka(0.25);
-    //   reflective_ptr12->set_kd(0.5);
-    //   reflective_ptr12->set_cd(1, 0, 0); // yellow
-    //   reflective_ptr12->set_ks(0.15);
-    //   reflective_ptr12->set_exp(100.0);
-    //   reflective_ptr12->set_kr(0.75);
-    //   reflective_ptr12->set_cr(0.65, 1, 0.30);
-
-    // reflective_ptr12->set_cr(1, 1, 1); // / default color * /
 
     // triangle
     Point3D a(2.5, -5, 1);
@@ -134,27 +102,7 @@ void World::build(void)
     triangle_ptr->set_material(pointerPH2);
     add_geometry(triangle_ptr);
 
-    // Reflective *reflective_ptr13 = new Reflective;
-    // reflective_ptr13->set_ka(0.25);
-    // reflective_ptr13->set_kd(0.5);
-    // reflective_ptr13->set_cd(1, 1, 1); // yellow
-    // reflective_ptr13->set_ks(0.15);
-    // reflective_ptr13->set_exp(100.0);
-    // reflective_ptr13->set_kr(0.75);
-    // reflective_ptr13->set_cr(0, 0, 1); // default color*/
-
-    //   Matte *pointerMT3 = new Matte;
-    //   pointerMT3->set_ka(0.2);
-    //   pointerMT3->set_kd(3);
-    //   pointerMT3->set_cd(RGBColor(0, 0, 1));
     // plane
-    Phong *pointerPH = new Phong;
-    pointerPH->set_cd(0, 0, 1);
-    pointerPH->set_exp(100);
-    pointerPH->set_ka(0.2);
-    pointerPH->set_kd(3);
-    pointerPH->set_ks(0.2);
-
     Plane *plane_ptr = new Plane(Point3D(0, 1, 0), Vector3D(0, 10, 2));
     plane_ptr->set_material(pointerPH); // green
     add_geometry(plane_ptr);
