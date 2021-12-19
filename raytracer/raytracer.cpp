@@ -29,7 +29,7 @@ int main(int argc, char **argv)
   Sampler *sampler = world.sampler_ptr;
   ViewPlane &viewplane = world.vplane;
   Image image(viewplane);
-  // world.set_acceleration(new BVH((&world)));
+  world.set_acceleration(new BVH((&world)));
   // world.set_acceleration(new KDTree((&world)));
   auto start = high_resolution_clock::now();
   std::vector<Ray> rays;
