@@ -35,6 +35,8 @@ int main(int argc, char **argv)
   // world.set_acceleration(new KDTree((&world)));
   auto start = high_resolution_clock::now();
 
+  omp_set_num_threads(12);
+
   #pragma omp parallel for
   for (int x = 0; x < viewplane.hres; x++)
   { // across.
