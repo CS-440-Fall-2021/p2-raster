@@ -7,6 +7,7 @@ ViewPlane::ViewPlane()
     this->normal = Vector3D(-320, 240, 0) ^ Vector3D(320, -240, 0);
     this->hres = 640;
     this->vres = 240;
+    this->max_depth = 1;
 }
 
 int ViewPlane::get_hres() const
@@ -27,4 +28,9 @@ void ViewPlane::set_hres(int a)
 void ViewPlane::set_vres(int a)
 {
     vres = a;
+}
+
+void ViewPlane::set_max_depth(int a)
+{
+    max_depth = a;
 }
