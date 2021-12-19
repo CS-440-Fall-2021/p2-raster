@@ -17,6 +17,7 @@
 #include "../materials/Material.hpp"
 
 #include <iostream>
+#include <math.h>
 #include <string>
 #include <array>
 
@@ -114,6 +115,12 @@ void World::add_ply(std::string fname, Material *mPtr, Point3D bottom,
     std::vector<Point3D> points;
     std::vector<Vector3D> normals;
     Vector3D normal;
+
+    // for(int i = 0; i < vPos.size(); i++)
+    // {
+    //     vPos[i][1] = (vPos[i][1] * cos(90)) + (vPos[i][1] * -sin(90));
+    //     vPos[i][2] = (vPos[i][2] * sin(90)) + (vPos[i][2] * cos(90));
+    // }
 
     Point3D modelMin = Point3D(vPos[0][0], vPos[0][1], vPos[0][2]);
     Point3D modelMax = Point3D(vPos[0][0], vPos[0][1], vPos[0][2]);
